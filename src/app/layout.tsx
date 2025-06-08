@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: "%w | Scan It",
+    template: "%s | Scan It",
     default: "Scan It"
   },
   description: "Scan to get guide",

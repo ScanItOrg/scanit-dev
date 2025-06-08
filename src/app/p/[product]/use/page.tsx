@@ -2,6 +2,10 @@ import { Button } from '@/components/ui/button'
 import * as Card from "@/components/ui/card";
 import React from 'react'
 
+export const metadata = {
+    title: "Use"
+}
+
 export default function Use() {
     return (
         <>
@@ -19,6 +23,19 @@ export default function Use() {
                         <p>· Never operate the appliance empty, in the event of this case occurred.</p>
                         <p>· Children should be supervised to ensure that they do not play with the appliance.</p>
                         <p>· Never immerse this appliance in water or other liquids. Use a damp cloth to clean the surface of the appliance. Do not use aggressive cleaners or scourers.</p>
+                    </Card.CardContent>
+                </Card.Card>
+
+            </div>
+            <div className="space-y-4 px-6 flex flex-col items-center mt-6">
+                <Button type="button" className="rounded-full pointer-events-none px-10">Steps before using the Kettle</Button>
+                <Card.Card>
+                    <Card.CardContent className="text-justify space-y-4">
+                        <p>· Remove all packing materials from the outside and inside of the kettle.</p>
+                        <p>· Make sure the rated voltage printed on the plate on the kettle is in conformity with local voltage before using.</p>
+                        <p>· If an extension lead is required, it must be earthed.</p>
+                        <p>· Boil the water in the kettle twice to clean the inside before use and pour out the boiled water.</p>
+                        <p>· Use thermoplastic body must connect with base.</p>
                     </Card.CardContent>
                 </Card.Card>
 

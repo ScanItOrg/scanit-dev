@@ -2,6 +2,10 @@ import { Button } from '@/components/ui/button'
 import * as Card from "@/components/ui/card";
 import React from 'react'
 
+export const metadata = {
+    title: "Caution"
+}
+
 export default function Caution() {
     return (
         <>

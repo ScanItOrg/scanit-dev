@@ -5,9 +5,9 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("jdbc:postgresql://ep-billowing-field-a5r2ia9m-pooler.us-east-2.aws.neon.tech:5432/scanit")
 }
-
+  
 model companies {
   id         Int        @id @default(autoincrement())
   name       String     @db.VarChar(255)
