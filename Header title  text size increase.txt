@@ -1,0 +1,4 @@
+Header title : text size increase 
+Header card : shadow
+
+see more card size increased 

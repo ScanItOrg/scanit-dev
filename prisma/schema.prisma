@@ -1,67 +1,70 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  output   = "../prisma/generated"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("jdbc:postgresql://ep-billowing-field-a5r2ia9m-pooler.us-east-2.aws.neon.tech:5432/scanit")
-}
-  
-model companies {
-  id         Int        @id @default(autoincrement())
-  name       String     @db.VarChar(255)
-  website    String?    @db.VarChar(255)
-  logo_url   String?
-  created_at DateTime?  @default(now()) @db.Timestamp(6)
-  updated_at DateTime?  @default(now()) @db.Timestamp(6)
-  products   products[]
+  url      = env("DATABASE_URL")
 }
 
-model manual_sections {
-  id           Int           @id @default(autoincrement())
-  manual_id    Int?
-  title        String        @db.VarChar(255)
-  content      String
-  order_index  Int?          @default(0)
-  created_at   DateTime?     @default(now()) @db.Timestamp(6)
-  updated_at   DateTime?     @default(now()) @db.Timestamp(6)
-  user_manuals user_manuals? @relation(fields: [manual_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  media        media[]
+model Company {
+  id       Int       @id @default(autoincrement())
+  name     String    @db.VarChar(255)
+  website  String?   @db.VarChar(255)
+  logoUrl  String?   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
 }
 
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model media {
-  id              Int              @id @default(autoincrement())
-  section_id      Int?
-  type            String?          @db.VarChar(50)
-  url             String
-  caption         String?
-  created_at      DateTime?        @default(now()) @db.Timestamp(6)
-  manual_sections manual_sections? @relation(fields: [section_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+model Product {
+  id        Int          @id @default(autoincrement())
+  name      String       @db.VarChar(255)
+  modelNo   String?      @db.VarChar(100)
+  imageUrl  String?      @db.VarChar(255)
+  releaseAt DateTime?    @db.Date
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  companyId Int
+
+  company   Company       @relation(fields: [companyId], references: [id])
+  manuals   UserManual[]  @relation("ProductManuals")
 }
 
-model products {
-  id           Int            @id @default(autoincrement())
-  company_id   Int?
-  name         String         @db.VarChar(255)
-  model_number String?        @db.VarChar(100)
-  image_url    String?
-  release_date DateTime?      @db.Date
-  created_at   DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at   DateTime?      @default(now()) @db.Timestamp(6)
-  companies    companies?     @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  user_manuals user_manuals[]
+model UserManual {
+  id          Int              @id @default(autoincrement())
+  language    String?          @default("en") @db.VarChar(50)
+  version     String?          @default("1.0") @db.VarChar(50)
+  publishedAt DateTime?        @db.Date
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  products    Product[]        @relation("ProductManuals")
+  sections    ManualSection[]
 }
 
-model user_manuals {
-  id              Int               @id @default(autoincrement())
-  product_id      Int?
-  language        String?           @default("en") @db.VarChar(50)
-  version         String?           @default("1.0") @db.VarChar(50)
-  published_at    DateTime?         @db.Date
-  created_at      DateTime?         @default(now()) @db.Timestamp(6)
-  updated_at      DateTime?         @default(now()) @db.Timestamp(6)
-  manual_sections manual_sections[]
-  products        products?         @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+model ManualSection {
+  id         Int            @id @default(autoincrement())
+  title      String         @db.VarChar(255)
+  content    String
+  orderIndex Int            @default(0)
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  manualId   Int
+
+  manual     UserManual     @relation(fields: [manualId], references: [id])
+  media      Media[]
+}
+
+model Media {
+  id         Int            @id @default(autoincrement())
+  type       String         @db.VarChar(50) // e.g., 'image', 'video'
+  url        String
+  caption    String?
+  createdAt  DateTime       @default(now())
+  sectionId  Int
+
+  section    ManualSection  @relation(fields: [sectionId], references: [id])
 }

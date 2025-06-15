@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../prisma/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  website   String?  @db.VarChar(255)
+  logoUrl   String?  @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+}
+
+model Product {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  modelNo   String?   @db.VarChar(100)
+  imageUrl  String?   @db.VarChar(255)
+  releaseAt DateTime? @db.Date
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  companyId Int
+
+  company Company      @relation(fields: [companyId], references: [id])
+  manuals UserManual[] @relation("ProductManuals")
+}
+
+model UserManual {
+  id          Int       @id @default(autoincrement())
+  language    String?   @default("en") @db.VarChar(50)
+  version     String?   @default("1.0") @db.VarChar(50)
+  publishedAt DateTime? @db.Date
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  products Product[]       @relation("ProductManuals")
+  sections ManualSection[]
+}
+
+model ManualSection {
+  id         Int      @id @default(autoincrement())
+  title      String   @db.VarChar(255)
+  content    String
+  orderIndex Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  manualId   Int
+
+  manual UserManual @relation(fields: [manualId], references: [id])
+  media  Media[]
+}
+
+model Media {
+  id        Int      @id @default(autoincrement())
+  type      String   @db.VarChar(50) // e.g., 'image', 'video'
+  url       String
+  caption   String?
+  createdAt DateTime @default(now())
+  sectionId Int
+
+  section ManualSection @relation(fields: [sectionId], references: [id])
+}
