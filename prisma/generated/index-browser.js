@@ -124,40 +124,40 @@ exports.Prisma.CompanyScalarFieldEnum = {
   id: 'id',
   name: 'name',
   website: 'website',
-  logoUrl: 'logoUrl',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  logo_url: 'logo_url',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  modelNo: 'modelNo',
-  imageUrl: 'imageUrl',
-  releaseAt: 'releaseAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  companyId: 'companyId'
+  model_no: 'model_no',
+  image_url: 'image_url',
+  release_at: 'release_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  company_id: 'company_id'
 };
 
 exports.Prisma.UserManualScalarFieldEnum = {
   id: 'id',
-  productId: 'productId',
+  product_id: 'product_id',
   language: 'language',
   version: 'version',
-  publishedAt: 'publishedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  published_at: 'published_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.ManualSectionScalarFieldEnum = {
   id: 'id',
   title: 'title',
   content: 'content',
-  orderIndex: 'orderIndex',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  manualId: 'manualId'
+  order_index: 'order_index',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  manual_id: 'manual_id'
 };
 
 exports.Prisma.MediaScalarFieldEnum = {
@@ -165,8 +165,8 @@ exports.Prisma.MediaScalarFieldEnum = {
   type: 'type',
   url: 'url',
   caption: 'caption',
-  createdAt: 'createdAt',
-  sectionId: 'sectionId'
+  created_at: 'created_at',
+  section_id: 'section_id'
 };
 
 exports.Prisma.SortOrder = {

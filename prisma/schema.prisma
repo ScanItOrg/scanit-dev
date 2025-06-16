@@ -9,63 +9,63 @@ datasource db {
 }
 
 model Company {
-  id        Int       @id @default(autoincrement())
-  name      String    @db.VarChar(255)
-  website   String?   @db.VarChar(255)
-  logoUrl   String?   @db.VarChar(255)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(255)
+  website    String?   @db.VarChar(255)
+  logo_url   String?   @map("logo_url") @db.VarChar(255)
+  created_at DateTime  @default(now()) @map("created_at")
+  updated_at DateTime  @updatedAt @map("updated_at")
 
-  products  Product[]
+  products   Product[]
 }
 
 model Product {
-  id         Int         @id @default(autoincrement())
-  name       String      @db.VarChar(255)
-  modelNo    String?     @db.VarChar(100)
-  imageUrl   String?     @db.VarChar(255)
-  releaseAt  DateTime?   @db.Date
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  companyId  Int
+  id          Int         @id @default(autoincrement())
+  name        String      @db.VarChar(255)
+  model_no    String?     @map("model_no") @db.VarChar(100)
+  image_url   String?     @map("image_url") @db.VarChar(255)
+  release_at  DateTime?   @map("release_at") @db.Date
+  created_at  DateTime    @default(now()) @map("created_at")
+  updated_at  DateTime    @updatedAt @map("updated_at")
+  company_id  Int         @map("company_id")
 
-  company    Company     @relation(fields: [companyId], references: [id])
-  manuals    UserManual[]  // One-to-many: One product can have multiple manuals
+  company     Company     @relation(fields: [company_id], references: [id])
+  manuals     UserManual[]
 }
 
 model UserManual {
-  id          Int              @id @default(autoincrement())
-  productId   Int              // FK to Product
-  language    String?          @default("en") @db.VarChar(50)
-  version     String?          @default("1.0") @db.VarChar(50)
-  publishedAt DateTime?        @db.Date
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  id           Int              @id @default(autoincrement())
+  product_id   Int              @map("product_id")
+  language     String?          @default("en") @db.VarChar(50)
+  version      String?          @default("1.0") @db.VarChar(50)
+  published_at DateTime?        @map("published_at") @db.Date
+  created_at   DateTime         @default(now()) @map("created_at")
+  updated_at   DateTime         @updatedAt @map("updated_at")
 
-  product     Product          @relation(fields: [productId], references: [id])
-  sections    ManualSection[]
+  product      Product          @relation(fields: [product_id], references: [id])
+  sections     ManualSection[]
 }
 
 model ManualSection {
-  id         Int            @id @default(autoincrement())
-  title      String         @db.VarChar(255)
-  content    String
-  orderIndex Int            @default(0)
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
-  manualId   Int
+  id          Int            @id @default(autoincrement())
+  title       String         @db.VarChar(255)
+  content     String
+  order_index Int            @default(0) @map("order_index")  
+  created_at  DateTime       @default(now()) @map("created_at")
+  updated_at  DateTime       @updatedAt @map("updated_at")
+  manual_id   Int            @map("manual_id")
 
-  manual     UserManual     @relation(fields: [manualId], references: [id])
-  media      Media[]
+  manual      UserManual     @relation(fields: [manual_id], references: [id])
+  media       Media[]
 }
 
 model Media {
-  id         Int            @id @default(autoincrement())
-  type       String         @db.VarChar(50)
-  url        String
-  caption    String?
-  createdAt  DateTime       @default(now())
-  sectionId  Int
+  id          Int            @id @default(autoincrement())
+  type        String         @db.VarChar(50)
+  url         String
+  caption     String?
+  created_at  DateTime       @default(now()) @map("created_at")
+  section_id  Int            @map("section_id")
 
-  section    ManualSection  @relation(fields: [sectionId], references: [id])
+  section     ManualSection  @relation(fields: [section_id], references: [id])
 }
