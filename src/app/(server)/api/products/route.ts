@@ -1,14 +1,15 @@
-
-import { NextResponse } from "next/server";
-import { prisma } from "../../../../../lib/prisma";
+import { prisma } from '@/lib/prisma';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
-  try {
-    const products = await prisma.products.findMany();
-    
-    return NextResponse.json(products);
-  } catch (error) {
-    console.error("[products]", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
-  }
+  const products = await prisma.product.findMany({
+    include: { company: true, manuals: true },
+  });
+  return NextResponse.json(products);
+}
+
+export async function POST(req: Request) {
+  const data = await req.json();
+  const product = await prisma.product.create({ data });
+  return NextResponse.json(product);
 }
