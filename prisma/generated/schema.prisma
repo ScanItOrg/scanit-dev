@@ -30,18 +30,19 @@ model Product {
   companyId Int
 
   company Company      @relation(fields: [companyId], references: [id])
-  manuals UserManual[] @relation("ProductManuals")
+  manuals UserManual[] // One-to-many: One product can have multiple manuals
 }
 
 model UserManual {
   id          Int       @id @default(autoincrement())
+  productId   Int // FK to Product
   language    String?   @default("en") @db.VarChar(50)
   version     String?   @default("1.0") @db.VarChar(50)
   publishedAt DateTime? @db.Date
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  products Product[]       @relation("ProductManuals")
+  product  Product         @relation(fields: [productId], references: [id])
   sections ManualSection[]
 }
 
@@ -60,7 +61,7 @@ model ManualSection {
 
 model Media {
   id        Int      @id @default(autoincrement())
-  type      String   @db.VarChar(50) // e.g., 'image', 'video'
+  type      String   @db.VarChar(50)
   url       String
   caption   String?
   createdAt DateTime @default(now())

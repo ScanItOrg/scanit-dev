@@ -1295,12 +1295,10 @@ export namespace Prisma {
    */
 
   export type UserManualCountOutputType = {
-    products: number
     sections: number
   }
 
   export type UserManualCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    products?: boolean | UserManualCountOutputTypeCountProductsArgs
     sections?: boolean | UserManualCountOutputTypeCountSectionsArgs
   }
 
@@ -1313,13 +1311,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserManualCountOutputType
      */
     select?: UserManualCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserManualCountOutputType without action
-   */
-  export type UserManualCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProductWhereInput
   }
 
   /**
@@ -3661,14 +3652,17 @@ export namespace Prisma {
 
   export type UserManualAvgAggregateOutputType = {
     id: number | null
+    productId: number | null
   }
 
   export type UserManualSumAggregateOutputType = {
     id: number | null
+    productId: number | null
   }
 
   export type UserManualMinAggregateOutputType = {
     id: number | null
+    productId: number | null
     language: string | null
     version: string | null
     publishedAt: Date | null
@@ -3678,6 +3672,7 @@ export namespace Prisma {
 
   export type UserManualMaxAggregateOutputType = {
     id: number | null
+    productId: number | null
     language: string | null
     version: string | null
     publishedAt: Date | null
@@ -3687,6 +3682,7 @@ export namespace Prisma {
 
   export type UserManualCountAggregateOutputType = {
     id: number
+    productId: number
     language: number
     version: number
     publishedAt: number
@@ -3698,14 +3694,17 @@ export namespace Prisma {
 
   export type UserManualAvgAggregateInputType = {
     id?: true
+    productId?: true
   }
 
   export type UserManualSumAggregateInputType = {
     id?: true
+    productId?: true
   }
 
   export type UserManualMinAggregateInputType = {
     id?: true
+    productId?: true
     language?: true
     version?: true
     publishedAt?: true
@@ -3715,6 +3714,7 @@ export namespace Prisma {
 
   export type UserManualMaxAggregateInputType = {
     id?: true
+    productId?: true
     language?: true
     version?: true
     publishedAt?: true
@@ -3724,6 +3724,7 @@ export namespace Prisma {
 
   export type UserManualCountAggregateInputType = {
     id?: true
+    productId?: true
     language?: true
     version?: true
     publishedAt?: true
@@ -3820,6 +3821,7 @@ export namespace Prisma {
 
   export type UserManualGroupByOutputType = {
     id: number
+    productId: number
     language: string | null
     version: string | null
     publishedAt: Date | null
@@ -3848,36 +3850,42 @@ export namespace Prisma {
 
   export type UserManualSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    productId?: boolean
     language?: boolean
     version?: boolean
     publishedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    products?: boolean | UserManual$productsArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
     sections?: boolean | UserManual$sectionsArgs<ExtArgs>
     _count?: boolean | UserManualCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userManual"]>
 
   export type UserManualSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    productId?: boolean
     language?: boolean
     version?: boolean
     publishedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userManual"]>
 
   export type UserManualSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    productId?: boolean
     language?: boolean
     version?: boolean
     publishedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userManual"]>
 
   export type UserManualSelectScalar = {
     id?: boolean
+    productId?: boolean
     language?: boolean
     version?: boolean
     publishedAt?: boolean
@@ -3885,23 +3893,28 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserManualOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "language" | "version" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["userManual"]>
+  export type UserManualOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "language" | "version" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["userManual"]>
   export type UserManualInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    products?: boolean | UserManual$productsArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
     sections?: boolean | UserManual$sectionsArgs<ExtArgs>
     _count?: boolean | UserManualCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UserManualIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserManualIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserManualIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+  export type UserManualIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
 
   export type $UserManualPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserManual"
     objects: {
-      products: Prisma.$ProductPayload<ExtArgs>[]
+      product: Prisma.$ProductPayload<ExtArgs>
       sections: Prisma.$ManualSectionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      productId: number
       language: string | null
       version: string | null
       publishedAt: Date | null
@@ -4301,7 +4314,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserManualClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    products<T extends UserManual$productsArgs<ExtArgs> = {}>(args?: Subset<T, UserManual$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     sections<T extends UserManual$sectionsArgs<ExtArgs> = {}>(args?: Subset<T, UserManual$sectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ManualSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4333,6 +4346,7 @@ export namespace Prisma {
    */
   interface UserManualFieldRefs {
     readonly id: FieldRef<"UserManual", 'Int'>
+    readonly productId: FieldRef<"UserManual", 'Int'>
     readonly language: FieldRef<"UserManual", 'String'>
     readonly version: FieldRef<"UserManual", 'String'>
     readonly publishedAt: FieldRef<"UserManual", 'DateTime'>
@@ -4587,6 +4601,10 @@ export namespace Prisma {
      */
     data: UserManualCreateManyInput | UserManualCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserManualIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4657,6 +4675,10 @@ export namespace Prisma {
      * Limit how many UserManuals to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserManualIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4723,30 +4745,6 @@ export namespace Prisma {
      * Limit how many UserManuals to delete.
      */
     limit?: number
-  }
-
-  /**
-   * UserManual.products
-   */
-  export type UserManual$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Product
-     */
-    select?: ProductSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Product
-     */
-    omit?: ProductOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductInclude<ExtArgs> | null
-    where?: ProductWhereInput
-    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
-    cursor?: ProductWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
   }
 
   /**
@@ -7099,6 +7097,7 @@ export namespace Prisma {
 
   export const UserManualScalarFieldEnum: {
     id: 'id',
+    productId: 'productId',
     language: 'language',
     version: 'version',
     publishedAt: 'publishedAt',
@@ -7364,23 +7363,25 @@ export namespace Prisma {
     OR?: UserManualWhereInput[]
     NOT?: UserManualWhereInput | UserManualWhereInput[]
     id?: IntFilter<"UserManual"> | number
+    productId?: IntFilter<"UserManual"> | number
     language?: StringNullableFilter<"UserManual"> | string | null
     version?: StringNullableFilter<"UserManual"> | string | null
     publishedAt?: DateTimeNullableFilter<"UserManual"> | Date | string | null
     createdAt?: DateTimeFilter<"UserManual"> | Date | string
     updatedAt?: DateTimeFilter<"UserManual"> | Date | string
-    products?: ProductListRelationFilter
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     sections?: ManualSectionListRelationFilter
   }
 
   export type UserManualOrderByWithRelationInput = {
     id?: SortOrder
+    productId?: SortOrder
     language?: SortOrderInput | SortOrder
     version?: SortOrderInput | SortOrder
     publishedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    products?: ProductOrderByRelationAggregateInput
+    product?: ProductOrderByWithRelationInput
     sections?: ManualSectionOrderByRelationAggregateInput
   }
 
@@ -7389,17 +7390,19 @@ export namespace Prisma {
     AND?: UserManualWhereInput | UserManualWhereInput[]
     OR?: UserManualWhereInput[]
     NOT?: UserManualWhereInput | UserManualWhereInput[]
+    productId?: IntFilter<"UserManual"> | number
     language?: StringNullableFilter<"UserManual"> | string | null
     version?: StringNullableFilter<"UserManual"> | string | null
     publishedAt?: DateTimeNullableFilter<"UserManual"> | Date | string | null
     createdAt?: DateTimeFilter<"UserManual"> | Date | string
     updatedAt?: DateTimeFilter<"UserManual"> | Date | string
-    products?: ProductListRelationFilter
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     sections?: ManualSectionListRelationFilter
   }, "id">
 
   export type UserManualOrderByWithAggregationInput = {
     id?: SortOrder
+    productId?: SortOrder
     language?: SortOrderInput | SortOrder
     version?: SortOrderInput | SortOrder
     publishedAt?: SortOrderInput | SortOrder
@@ -7417,6 +7420,7 @@ export namespace Prisma {
     OR?: UserManualScalarWhereWithAggregatesInput[]
     NOT?: UserManualScalarWhereWithAggregatesInput | UserManualScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"UserManual"> | number
+    productId?: IntWithAggregatesFilter<"UserManual"> | number
     language?: StringNullableWithAggregatesFilter<"UserManual"> | string | null
     version?: StringNullableWithAggregatesFilter<"UserManual"> | string | null
     publishedAt?: DateTimeNullableWithAggregatesFilter<"UserManual"> | Date | string | null
@@ -7628,7 +7632,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutProductsInput
-    manuals?: UserManualCreateNestedManyWithoutProductsInput
+    manuals?: UserManualCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -7640,7 +7644,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     companyId: number
-    manuals?: UserManualUncheckedCreateNestedManyWithoutProductsInput
+    manuals?: UserManualUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductUpdateInput = {
@@ -7651,7 +7655,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutProductsNestedInput
-    manuals?: UserManualUpdateManyWithoutProductsNestedInput
+    manuals?: UserManualUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -7663,7 +7667,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyId?: IntFieldUpdateOperationsInput | number
-    manuals?: UserManualUncheckedUpdateManyWithoutProductsNestedInput
+    manuals?: UserManualUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
@@ -7703,18 +7707,18 @@ export namespace Prisma {
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    products?: ProductCreateNestedManyWithoutManualsInput
+    product: ProductCreateNestedOneWithoutManualsInput
     sections?: ManualSectionCreateNestedManyWithoutManualInput
   }
 
   export type UserManualUncheckedCreateInput = {
     id?: number
+    productId: number
     language?: string | null
     version?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    products?: ProductUncheckedCreateNestedManyWithoutManualsInput
     sections?: ManualSectionUncheckedCreateNestedManyWithoutManualInput
   }
 
@@ -7724,23 +7728,24 @@ export namespace Prisma {
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    products?: ProductUpdateManyWithoutManualsNestedInput
+    product?: ProductUpdateOneRequiredWithoutManualsNestedInput
     sections?: ManualSectionUpdateManyWithoutManualNestedInput
   }
 
   export type UserManualUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
     language?: NullableStringFieldUpdateOperationsInput | string | null
     version?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    products?: ProductUncheckedUpdateManyWithoutManualsNestedInput
     sections?: ManualSectionUncheckedUpdateManyWithoutManualNestedInput
   }
 
   export type UserManualCreateManyInput = {
     id?: number
+    productId: number
     language?: string | null
     version?: string | null
     publishedAt?: Date | string | null
@@ -7758,6 +7763,7 @@ export namespace Prisma {
 
   export type UserManualUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
     language?: NullableStringFieldUpdateOperationsInput | string | null
     version?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8145,6 +8151,11 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type ProductScalarRelationFilter = {
+    is?: ProductWhereInput
+    isNot?: ProductWhereInput
+  }
+
   export type ManualSectionListRelationFilter = {
     every?: ManualSectionWhereInput
     some?: ManualSectionWhereInput
@@ -8157,6 +8168,7 @@ export namespace Prisma {
 
   export type UserManualCountOrderByAggregateInput = {
     id?: SortOrder
+    productId?: SortOrder
     language?: SortOrder
     version?: SortOrder
     publishedAt?: SortOrder
@@ -8166,10 +8178,12 @@ export namespace Prisma {
 
   export type UserManualAvgOrderByAggregateInput = {
     id?: SortOrder
+    productId?: SortOrder
   }
 
   export type UserManualMaxOrderByAggregateInput = {
     id?: SortOrder
+    productId?: SortOrder
     language?: SortOrder
     version?: SortOrder
     publishedAt?: SortOrder
@@ -8179,6 +8193,7 @@ export namespace Prisma {
 
   export type UserManualMinOrderByAggregateInput = {
     id?: SortOrder
+    productId?: SortOrder
     language?: SortOrder
     version?: SortOrder
     publishedAt?: SortOrder
@@ -8188,6 +8203,7 @@ export namespace Prisma {
 
   export type UserManualSumOrderByAggregateInput = {
     id?: SortOrder
+    productId?: SortOrder
   }
 
   export type UserManualScalarRelationFilter = {
@@ -8357,15 +8373,17 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
-  export type UserManualCreateNestedManyWithoutProductsInput = {
-    create?: XOR<UserManualCreateWithoutProductsInput, UserManualUncheckedCreateWithoutProductsInput> | UserManualCreateWithoutProductsInput[] | UserManualUncheckedCreateWithoutProductsInput[]
-    connectOrCreate?: UserManualCreateOrConnectWithoutProductsInput | UserManualCreateOrConnectWithoutProductsInput[]
+  export type UserManualCreateNestedManyWithoutProductInput = {
+    create?: XOR<UserManualCreateWithoutProductInput, UserManualUncheckedCreateWithoutProductInput> | UserManualCreateWithoutProductInput[] | UserManualUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: UserManualCreateOrConnectWithoutProductInput | UserManualCreateOrConnectWithoutProductInput[]
+    createMany?: UserManualCreateManyProductInputEnvelope
     connect?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
   }
 
-  export type UserManualUncheckedCreateNestedManyWithoutProductsInput = {
-    create?: XOR<UserManualCreateWithoutProductsInput, UserManualUncheckedCreateWithoutProductsInput> | UserManualCreateWithoutProductsInput[] | UserManualUncheckedCreateWithoutProductsInput[]
-    connectOrCreate?: UserManualCreateOrConnectWithoutProductsInput | UserManualCreateOrConnectWithoutProductsInput[]
+  export type UserManualUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<UserManualCreateWithoutProductInput, UserManualUncheckedCreateWithoutProductInput> | UserManualCreateWithoutProductInput[] | UserManualUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: UserManualCreateOrConnectWithoutProductInput | UserManualCreateOrConnectWithoutProductInput[]
+    createMany?: UserManualCreateManyProductInputEnvelope
     connect?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
   }
 
@@ -8381,36 +8399,38 @@ export namespace Prisma {
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutProductsInput, CompanyUpdateWithoutProductsInput>, CompanyUncheckedUpdateWithoutProductsInput>
   }
 
-  export type UserManualUpdateManyWithoutProductsNestedInput = {
-    create?: XOR<UserManualCreateWithoutProductsInput, UserManualUncheckedCreateWithoutProductsInput> | UserManualCreateWithoutProductsInput[] | UserManualUncheckedCreateWithoutProductsInput[]
-    connectOrCreate?: UserManualCreateOrConnectWithoutProductsInput | UserManualCreateOrConnectWithoutProductsInput[]
-    upsert?: UserManualUpsertWithWhereUniqueWithoutProductsInput | UserManualUpsertWithWhereUniqueWithoutProductsInput[]
+  export type UserManualUpdateManyWithoutProductNestedInput = {
+    create?: XOR<UserManualCreateWithoutProductInput, UserManualUncheckedCreateWithoutProductInput> | UserManualCreateWithoutProductInput[] | UserManualUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: UserManualCreateOrConnectWithoutProductInput | UserManualCreateOrConnectWithoutProductInput[]
+    upsert?: UserManualUpsertWithWhereUniqueWithoutProductInput | UserManualUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: UserManualCreateManyProductInputEnvelope
     set?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
     disconnect?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
     delete?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
     connect?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
-    update?: UserManualUpdateWithWhereUniqueWithoutProductsInput | UserManualUpdateWithWhereUniqueWithoutProductsInput[]
-    updateMany?: UserManualUpdateManyWithWhereWithoutProductsInput | UserManualUpdateManyWithWhereWithoutProductsInput[]
+    update?: UserManualUpdateWithWhereUniqueWithoutProductInput | UserManualUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: UserManualUpdateManyWithWhereWithoutProductInput | UserManualUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: UserManualScalarWhereInput | UserManualScalarWhereInput[]
   }
 
-  export type UserManualUncheckedUpdateManyWithoutProductsNestedInput = {
-    create?: XOR<UserManualCreateWithoutProductsInput, UserManualUncheckedCreateWithoutProductsInput> | UserManualCreateWithoutProductsInput[] | UserManualUncheckedCreateWithoutProductsInput[]
-    connectOrCreate?: UserManualCreateOrConnectWithoutProductsInput | UserManualCreateOrConnectWithoutProductsInput[]
-    upsert?: UserManualUpsertWithWhereUniqueWithoutProductsInput | UserManualUpsertWithWhereUniqueWithoutProductsInput[]
+  export type UserManualUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<UserManualCreateWithoutProductInput, UserManualUncheckedCreateWithoutProductInput> | UserManualCreateWithoutProductInput[] | UserManualUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: UserManualCreateOrConnectWithoutProductInput | UserManualCreateOrConnectWithoutProductInput[]
+    upsert?: UserManualUpsertWithWhereUniqueWithoutProductInput | UserManualUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: UserManualCreateManyProductInputEnvelope
     set?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
     disconnect?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
     delete?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
     connect?: UserManualWhereUniqueInput | UserManualWhereUniqueInput[]
-    update?: UserManualUpdateWithWhereUniqueWithoutProductsInput | UserManualUpdateWithWhereUniqueWithoutProductsInput[]
-    updateMany?: UserManualUpdateManyWithWhereWithoutProductsInput | UserManualUpdateManyWithWhereWithoutProductsInput[]
+    update?: UserManualUpdateWithWhereUniqueWithoutProductInput | UserManualUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: UserManualUpdateManyWithWhereWithoutProductInput | UserManualUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: UserManualScalarWhereInput | UserManualScalarWhereInput[]
   }
 
-  export type ProductCreateNestedManyWithoutManualsInput = {
-    create?: XOR<ProductCreateWithoutManualsInput, ProductUncheckedCreateWithoutManualsInput> | ProductCreateWithoutManualsInput[] | ProductUncheckedCreateWithoutManualsInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutManualsInput | ProductCreateOrConnectWithoutManualsInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  export type ProductCreateNestedOneWithoutManualsInput = {
+    create?: XOR<ProductCreateWithoutManualsInput, ProductUncheckedCreateWithoutManualsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutManualsInput
+    connect?: ProductWhereUniqueInput
   }
 
   export type ManualSectionCreateNestedManyWithoutManualInput = {
@@ -8420,12 +8440,6 @@ export namespace Prisma {
     connect?: ManualSectionWhereUniqueInput | ManualSectionWhereUniqueInput[]
   }
 
-  export type ProductUncheckedCreateNestedManyWithoutManualsInput = {
-    create?: XOR<ProductCreateWithoutManualsInput, ProductUncheckedCreateWithoutManualsInput> | ProductCreateWithoutManualsInput[] | ProductUncheckedCreateWithoutManualsInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutManualsInput | ProductCreateOrConnectWithoutManualsInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
-
   export type ManualSectionUncheckedCreateNestedManyWithoutManualInput = {
     create?: XOR<ManualSectionCreateWithoutManualInput, ManualSectionUncheckedCreateWithoutManualInput> | ManualSectionCreateWithoutManualInput[] | ManualSectionUncheckedCreateWithoutManualInput[]
     connectOrCreate?: ManualSectionCreateOrConnectWithoutManualInput | ManualSectionCreateOrConnectWithoutManualInput[]
@@ -8433,17 +8447,12 @@ export namespace Prisma {
     connect?: ManualSectionWhereUniqueInput | ManualSectionWhereUniqueInput[]
   }
 
-  export type ProductUpdateManyWithoutManualsNestedInput = {
-    create?: XOR<ProductCreateWithoutManualsInput, ProductUncheckedCreateWithoutManualsInput> | ProductCreateWithoutManualsInput[] | ProductUncheckedCreateWithoutManualsInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutManualsInput | ProductCreateOrConnectWithoutManualsInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutManualsInput | ProductUpsertWithWhereUniqueWithoutManualsInput[]
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutManualsInput | ProductUpdateWithWhereUniqueWithoutManualsInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutManualsInput | ProductUpdateManyWithWhereWithoutManualsInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
+  export type ProductUpdateOneRequiredWithoutManualsNestedInput = {
+    create?: XOR<ProductCreateWithoutManualsInput, ProductUncheckedCreateWithoutManualsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutManualsInput
+    upsert?: ProductUpsertWithoutManualsInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutManualsInput, ProductUpdateWithoutManualsInput>, ProductUncheckedUpdateWithoutManualsInput>
   }
 
   export type ManualSectionUpdateManyWithoutManualNestedInput = {
@@ -8458,19 +8467,6 @@ export namespace Prisma {
     update?: ManualSectionUpdateWithWhereUniqueWithoutManualInput | ManualSectionUpdateWithWhereUniqueWithoutManualInput[]
     updateMany?: ManualSectionUpdateManyWithWhereWithoutManualInput | ManualSectionUpdateManyWithWhereWithoutManualInput[]
     deleteMany?: ManualSectionScalarWhereInput | ManualSectionScalarWhereInput[]
-  }
-
-  export type ProductUncheckedUpdateManyWithoutManualsNestedInput = {
-    create?: XOR<ProductCreateWithoutManualsInput, ProductUncheckedCreateWithoutManualsInput> | ProductCreateWithoutManualsInput[] | ProductUncheckedCreateWithoutManualsInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutManualsInput | ProductCreateOrConnectWithoutManualsInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutManualsInput | ProductUpsertWithWhereUniqueWithoutManualsInput[]
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutManualsInput | ProductUpdateWithWhereUniqueWithoutManualsInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutManualsInput | ProductUpdateManyWithWhereWithoutManualsInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
   export type ManualSectionUncheckedUpdateManyWithoutManualNestedInput = {
@@ -8725,7 +8721,7 @@ export namespace Prisma {
     releaseAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    manuals?: UserManualCreateNestedManyWithoutProductsInput
+    manuals?: UserManualCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCompanyInput = {
@@ -8736,7 +8732,7 @@ export namespace Prisma {
     releaseAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    manuals?: UserManualUncheckedCreateNestedManyWithoutProductsInput
+    manuals?: UserManualUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCompanyInput = {
@@ -8801,7 +8797,7 @@ export namespace Prisma {
     create: XOR<CompanyCreateWithoutProductsInput, CompanyUncheckedCreateWithoutProductsInput>
   }
 
-  export type UserManualCreateWithoutProductsInput = {
+  export type UserManualCreateWithoutProductInput = {
     language?: string | null
     version?: string | null
     publishedAt?: Date | string | null
@@ -8810,7 +8806,7 @@ export namespace Prisma {
     sections?: ManualSectionCreateNestedManyWithoutManualInput
   }
 
-  export type UserManualUncheckedCreateWithoutProductsInput = {
+  export type UserManualUncheckedCreateWithoutProductInput = {
     id?: number
     language?: string | null
     version?: string | null
@@ -8820,9 +8816,14 @@ export namespace Prisma {
     sections?: ManualSectionUncheckedCreateNestedManyWithoutManualInput
   }
 
-  export type UserManualCreateOrConnectWithoutProductsInput = {
+  export type UserManualCreateOrConnectWithoutProductInput = {
     where: UserManualWhereUniqueInput
-    create: XOR<UserManualCreateWithoutProductsInput, UserManualUncheckedCreateWithoutProductsInput>
+    create: XOR<UserManualCreateWithoutProductInput, UserManualUncheckedCreateWithoutProductInput>
+  }
+
+  export type UserManualCreateManyProductInputEnvelope = {
+    data: UserManualCreateManyProductInput | UserManualCreateManyProductInput[]
+    skipDuplicates?: boolean
   }
 
   export type CompanyUpsertWithoutProductsInput = {
@@ -8853,20 +8854,20 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserManualUpsertWithWhereUniqueWithoutProductsInput = {
+  export type UserManualUpsertWithWhereUniqueWithoutProductInput = {
     where: UserManualWhereUniqueInput
-    update: XOR<UserManualUpdateWithoutProductsInput, UserManualUncheckedUpdateWithoutProductsInput>
-    create: XOR<UserManualCreateWithoutProductsInput, UserManualUncheckedCreateWithoutProductsInput>
+    update: XOR<UserManualUpdateWithoutProductInput, UserManualUncheckedUpdateWithoutProductInput>
+    create: XOR<UserManualCreateWithoutProductInput, UserManualUncheckedCreateWithoutProductInput>
   }
 
-  export type UserManualUpdateWithWhereUniqueWithoutProductsInput = {
+  export type UserManualUpdateWithWhereUniqueWithoutProductInput = {
     where: UserManualWhereUniqueInput
-    data: XOR<UserManualUpdateWithoutProductsInput, UserManualUncheckedUpdateWithoutProductsInput>
+    data: XOR<UserManualUpdateWithoutProductInput, UserManualUncheckedUpdateWithoutProductInput>
   }
 
-  export type UserManualUpdateManyWithWhereWithoutProductsInput = {
+  export type UserManualUpdateManyWithWhereWithoutProductInput = {
     where: UserManualScalarWhereInput
-    data: XOR<UserManualUpdateManyMutationInput, UserManualUncheckedUpdateManyWithoutProductsInput>
+    data: XOR<UserManualUpdateManyMutationInput, UserManualUncheckedUpdateManyWithoutProductInput>
   }
 
   export type UserManualScalarWhereInput = {
@@ -8874,6 +8875,7 @@ export namespace Prisma {
     OR?: UserManualScalarWhereInput[]
     NOT?: UserManualScalarWhereInput | UserManualScalarWhereInput[]
     id?: IntFilter<"UserManual"> | number
+    productId?: IntFilter<"UserManual"> | number
     language?: StringNullableFilter<"UserManual"> | string | null
     version?: StringNullableFilter<"UserManual"> | string | null
     publishedAt?: DateTimeNullableFilter<"UserManual"> | Date | string | null
@@ -8936,20 +8938,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ProductUpsertWithWhereUniqueWithoutManualsInput = {
-    where: ProductWhereUniqueInput
+  export type ProductUpsertWithoutManualsInput = {
     update: XOR<ProductUpdateWithoutManualsInput, ProductUncheckedUpdateWithoutManualsInput>
     create: XOR<ProductCreateWithoutManualsInput, ProductUncheckedCreateWithoutManualsInput>
+    where?: ProductWhereInput
   }
 
-  export type ProductUpdateWithWhereUniqueWithoutManualsInput = {
-    where: ProductWhereUniqueInput
+  export type ProductUpdateToOneWithWhereWithoutManualsInput = {
+    where?: ProductWhereInput
     data: XOR<ProductUpdateWithoutManualsInput, ProductUncheckedUpdateWithoutManualsInput>
   }
 
-  export type ProductUpdateManyWithWhereWithoutManualsInput = {
-    where: ProductScalarWhereInput
-    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutManualsInput>
+  export type ProductUpdateWithoutManualsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelNo?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    releaseAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutProductsNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutManualsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    modelNo?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    releaseAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ManualSectionUpsertWithWhereUniqueWithoutManualInput = {
@@ -8987,17 +9005,17 @@ export namespace Prisma {
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    products?: ProductCreateNestedManyWithoutManualsInput
+    product: ProductCreateNestedOneWithoutManualsInput
   }
 
   export type UserManualUncheckedCreateWithoutSectionsInput = {
     id?: number
+    productId: number
     language?: string | null
     version?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    products?: ProductUncheckedCreateNestedManyWithoutManualsInput
   }
 
   export type UserManualCreateOrConnectWithoutSectionsInput = {
@@ -9047,17 +9065,17 @@ export namespace Prisma {
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    products?: ProductUpdateManyWithoutManualsNestedInput
+    product?: ProductUpdateOneRequiredWithoutManualsNestedInput
   }
 
   export type UserManualUncheckedUpdateWithoutSectionsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
     language?: NullableStringFieldUpdateOperationsInput | string | null
     version?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    products?: ProductUncheckedUpdateManyWithoutManualsNestedInput
   }
 
   export type MediaUpsertWithWhereUniqueWithoutSectionInput = {
@@ -9159,7 +9177,7 @@ export namespace Prisma {
     releaseAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    manuals?: UserManualUpdateManyWithoutProductsNestedInput
+    manuals?: UserManualUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCompanyInput = {
@@ -9170,7 +9188,7 @@ export namespace Prisma {
     releaseAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    manuals?: UserManualUncheckedUpdateManyWithoutProductsNestedInput
+    manuals?: UserManualUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutCompanyInput = {
@@ -9183,7 +9201,16 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserManualUpdateWithoutProductsInput = {
+  export type UserManualCreateManyProductInput = {
+    id?: number
+    language?: string | null
+    version?: string | null
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserManualUpdateWithoutProductInput = {
     language?: NullableStringFieldUpdateOperationsInput | string | null
     version?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9192,7 +9219,7 @@ export namespace Prisma {
     sections?: ManualSectionUpdateManyWithoutManualNestedInput
   }
 
-  export type UserManualUncheckedUpdateWithoutProductsInput = {
+  export type UserManualUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     language?: NullableStringFieldUpdateOperationsInput | string | null
     version?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9202,7 +9229,7 @@ export namespace Prisma {
     sections?: ManualSectionUncheckedUpdateManyWithoutManualNestedInput
   }
 
-  export type UserManualUncheckedUpdateManyWithoutProductsInput = {
+  export type UserManualUncheckedUpdateManyWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     language?: NullableStringFieldUpdateOperationsInput | string | null
     version?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9218,38 +9245,6 @@ export namespace Prisma {
     orderIndex?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type ProductUpdateWithoutManualsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    modelNo?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    releaseAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    company?: CompanyUpdateOneRequiredWithoutProductsNestedInput
-  }
-
-  export type ProductUncheckedUpdateWithoutManualsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    modelNo?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    releaseAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ProductUncheckedUpdateManyWithoutManualsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    modelNo?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    releaseAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ManualSectionUpdateWithoutManualInput = {

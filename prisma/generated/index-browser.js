@@ -142,6 +142,7 @@ exports.Prisma.ProductScalarFieldEnum = {
 
 exports.Prisma.UserManualScalarFieldEnum = {
   id: 'id',
+  productId: 'productId',
   language: 'language',
   version: 'version',
   publishedAt: 'publishedAt',
