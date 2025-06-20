@@ -9,8 +9,3 @@ export async function GET() {
   return NextResponse.json(sections);
 }
 
-export async function POST(req: Request) {
-  const data = await req.json();
-  const section = await prisma.manualSection.create({ data });
-  return NextResponse.json(section);
-}
