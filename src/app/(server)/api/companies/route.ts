@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
-// GET all companies
 export async function GET() {
   const companies = await prisma.company.findMany({
     orderBy: { id: 'asc' },
