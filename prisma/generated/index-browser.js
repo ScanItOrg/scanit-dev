@@ -124,29 +124,39 @@ exports.Prisma.CompanyScalarFieldEnum = {
   id: 'id',
   name: 'name',
   website: 'website',
-  logo_url: 'logo_url',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  logo_url: 'logo_url',
+  updated_at: 'updated_at',
+  description: 'description'
 };
 
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  model_no: 'model_no',
-  image_url: 'image_url',
-  release_at: 'release_at',
+  description: 'description',
+  category: 'category',
+  company_id: 'company_id',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  company_id: 'company_id'
+  image_url: 'image_url',
+  model_no: 'model_no',
+  release_at: 'release_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  type: 'type'
 };
 
 exports.Prisma.UserManualScalarFieldEnum = {
   id: 'id',
-  product_id: 'product_id',
   language: 'language',
   version: 'version',
-  published_at: 'published_at',
   created_at: 'created_at',
+  product_id: 'product_id',
+  published_at: 'published_at',
   updated_at: 'updated_at'
 };
 
@@ -154,10 +164,10 @@ exports.Prisma.ManualSectionScalarFieldEnum = {
   id: 'id',
   title: 'title',
   content: 'content',
-  order_index: 'order_index',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  manual_id: 'manual_id'
+  manual_id: 'manual_id',
+  order_index: 'order_index',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.MediaScalarFieldEnum = {
@@ -183,11 +193,16 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.CategoryType = exports.$Enums.CategoryType = {
+  PRODUCT: 'PRODUCT',
+  COMPANY: 'COMPANY',
+  OTHER: 'OTHER'
+};
 
 exports.Prisma.ModelName = {
   Company: 'Company',
   Product: 'Product',
+  Category: 'Category',
   UserManual: 'UserManual',
   ManualSection: 'ManualSection',
   Media: 'Media'

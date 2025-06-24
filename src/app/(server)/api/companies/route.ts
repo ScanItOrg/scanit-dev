@@ -9,6 +9,7 @@ export async function GET() {
       name: true,
       website: true,
       logo_url: true,
+      description: true,
     },
   });
   return NextResponse.json(companies);
