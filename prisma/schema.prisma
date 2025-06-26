@@ -15,35 +15,29 @@ model Company {
   created_at  DateTime  @default(now()) @map("created_at")
   logo_url    String?   @map("logo_url") @db.VarChar(255)
   updated_at  DateTime  @updatedAt @map("updated_at")
-  description String    
+  description String
   products    Product[]
 }
 
 model Product {
   id          Int          @id @default(autoincrement())
   name        String       @db.VarChar(255)
-  description String
-  category    String
   company_id  Int          @map("company_id")
   created_at  DateTime     @default(now()) @map("created_at")
   model_no    String?      @map("model_no") @db.VarChar(100)
   release_at  DateTime?    @map("release_at") @db.Date
   updated_at  DateTime     @updatedAt @map("updated_at")
+  category    String
+  description String
   company     Company      @relation(fields: [company_id], references: [id])
-  manuals    UserManual[]
-}
-
-enum CategoryType {
-  PRODUCT
-  COMPANY 
-  OTHER
+  manuals     UserManual[]
 }
 
 model Category {
-  id        Int      @id @default(autoincrement())
-  name      String
-  code      String   @unique
-  type      CategoryType
+  id   Int          @id @default(autoincrement())
+  name String
+  code String       @unique
+  type CategoryType
 }
 
 model UserManual {
@@ -59,30 +53,29 @@ model UserManual {
 }
 
 model ManualSection {
-  id          Int         @id @default(autoincrement())
-  title       String      @db.VarChar(255)
+  id          Int        @id @default(autoincrement())
+  title       String     @db.VarChar(255)
   content     String
-  created_at  DateTime    @default(now()) @map("created_at")
-  manual_id   Int         @map("manual_id")
-  order_index Int         @default(0) @map("order_index")
-  updated_at  DateTime    @updatedAt @map("updated_at")
-
-  manual      UserManual  @relation(fields: [manual_id], references: [id])
+  created_at  DateTime   @default(now()) @map("created_at")
+  manual_id   Int        @map("manual_id")
+  order_index Int        @default(0) @map("order_index")
+  updated_at  DateTime   @updatedAt @map("updated_at")
+  manual      UserManual @relation(fields: [manual_id], references: [id])
 }
 
-enum MediaOwnerType {
-  COMPANY
-  PRODUCT
-  SECTION
-  MANUAL
-}
 model Media {
-  id         Int             @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
+  type       String    @db.VarChar(50)
   url        String
-  type       String
   caption    String?
-  owner_id   Int
-  owner_type MediaOwnerType
-  created_at DateTime        @default(now())
-  updated_at DateTime        @updatedAt
+  created_at DateTime  @default(now())
+  owner_id   Int?
+  owner_type String?
+  updated_at DateTime? @default(now()) @updatedAt @db.Timestamptz(6)
+}
+
+enum CategoryType {
+  PRODUCT
+  COMPANY
+  OTHER
 }

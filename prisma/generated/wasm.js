@@ -133,14 +133,13 @@ exports.Prisma.CompanyScalarFieldEnum = {
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  description: 'description',
-  category: 'category',
   company_id: 'company_id',
   created_at: 'created_at',
-  image_url: 'image_url',
   model_no: 'model_no',
   release_at: 'release_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  category: 'category',
+  description: 'description'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -176,7 +175,9 @@ exports.Prisma.MediaScalarFieldEnum = {
   url: 'url',
   caption: 'caption',
   created_at: 'created_at',
-  section_id: 'section_id'
+  owner_id: 'owner_id',
+  owner_type: 'owner_type',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.SortOrder = {

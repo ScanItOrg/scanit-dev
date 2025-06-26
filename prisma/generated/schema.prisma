@@ -22,22 +22,15 @@ model Company {
 model Product {
   id          Int          @id @default(autoincrement())
   name        String       @db.VarChar(255)
-  description String
-  category    String
   company_id  Int          @map("company_id")
   created_at  DateTime     @default(now()) @map("created_at")
-  image_url   String?      @map("image_url") @db.VarChar(255)
   model_no    String?      @map("model_no") @db.VarChar(100)
   release_at  DateTime?    @map("release_at") @db.Date
   updated_at  DateTime     @updatedAt @map("updated_at")
+  category    String
+  description String
   company     Company      @relation(fields: [company_id], references: [id])
   manuals     UserManual[]
-}
-
-enum CategoryType {
-  PRODUCT
-  COMPANY
-  OTHER
 }
 
 model Category {
@@ -68,15 +61,21 @@ model ManualSection {
   order_index Int        @default(0) @map("order_index")
   updated_at  DateTime   @updatedAt @map("updated_at")
   manual      UserManual @relation(fields: [manual_id], references: [id])
-  media       Media[]
 }
 
 model Media {
-  id         Int           @id @default(autoincrement())
-  type       String        @db.VarChar(50)
+  id         Int       @id @default(autoincrement())
+  type       String    @db.VarChar(50)
   url        String
   caption    String?
-  created_at DateTime      @default(now()) @map("created_at")
-  section_id Int           @map("section_id")
-  section    ManualSection @relation(fields: [section_id], references: [id])
+  created_at DateTime  @default(now())
+  owner_id   Int?
+  owner_type String?
+  updated_at DateTime? @default(now()) @updatedAt @db.Timestamptz(6)
+}
+
+enum CategoryType {
+  PRODUCT
+  COMPANY
+  OTHER
 }
