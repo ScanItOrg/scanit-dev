@@ -20,25 +20,18 @@ export async function GET(
       p.model_no,
       p.release_at,
       p.description,
-      COALESCE(
-        json_agg(
-          json_build_object(
-            'id', m.id,
-            'type', m.type,
-            'url', m.url,
-            'caption', m.caption,
-            'created_at', m.created_at,
-            'updated_at', m.updated_at
-          )
-        ) FILTER (WHERE m.id IS NOT NULL),
-        '[]'
-      ) AS media
-    FROM Product p
-    LEFT JOIN Media m 
-      ON m.owner_id = p.id AND m.owner_type = 'PRODUCT'
+      m.url,
+      m.caption,
+      m.owner_type
+    FROM "Product" p
+    LEFT JOIN "Media" m 
+      ON m.owner_id = p.id 
+      AND m.owner_type = 'PRODUCT'
+      AND m.is_main = 'Y'
     WHERE p.company_id = ${companyId}
-    GROUP BY p.id
   `;
+
+  console.log("productsWithMedia: ", productsWithMedia);
 
   return NextResponse.json(productsWithMedia);
 }

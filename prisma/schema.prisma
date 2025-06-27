@@ -72,6 +72,7 @@ model Media {
   owner_id   Int?
   owner_type String?
   updated_at DateTime? @default(now()) @updatedAt @db.Timestamptz(6)
+  is_main    String?   @default("N") @db.Char(1)
 }
 
 enum CategoryType {

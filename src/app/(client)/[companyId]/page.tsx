@@ -19,9 +19,11 @@ async function getProductByCompany(companyId: number): Promise<Product[]> {
 
   if (!API_URL) throw new Error("Missing API_URL in environment");
 
-  const res = await fetch(`${API_URL}/api/companies/${companyId}/products`, {
-    next: { revalidate: 60 },
-  });
+  const res = await fetch(`${API_URL}/api/companies/${companyId}/products`, 
+    {
+      next: { revalidate: 60 },
+    }
+  );
 
   if (!res.ok) throw new Error("Failed to fetch products");
 
@@ -35,6 +37,7 @@ export default async function ProductByCompany({
 }) {
   const {companyId} = await params;
   const products = await getProductByCompany(Number(companyId));
+  console.log("products with: ", products);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 max-sm:w-full">

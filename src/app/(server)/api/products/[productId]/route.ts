@@ -12,7 +12,6 @@ export async function GET(req: Request, { params }: { params: { productId: strin
       name: true,
       model_no: true,
       category: true,
-      image_url: true,
       release_at: true,
       description: true,
     }

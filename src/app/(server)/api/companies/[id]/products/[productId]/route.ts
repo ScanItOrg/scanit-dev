@@ -26,6 +26,7 @@ export async function GET(
       description: true,
     },
   });
+  
   const media = await prisma.media.findMany({
     where: { owner_id: pid, owner_type: "PRODUCT" },
   });
