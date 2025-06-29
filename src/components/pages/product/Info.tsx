@@ -3,8 +3,16 @@ import { Button } from "@/components/ui/button";
 import * as Card from "@/components/ui/card";
 import React from "react";
 
+type Product = {
+  id: number;
+  name: string;
+  model_no: string;
+  category: string;
+  release_at: string;
+  description: string;
+};
 
-function Info() {
+function Info({product}: Product) {
     return (
         <React.Fragment>
             <div className="space-y-4 px-6 flex flex-col items-center">

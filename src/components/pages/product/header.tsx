@@ -3,7 +3,15 @@ import * as Card from "@/components/ui/card";
 import Image from "next/image";
 import React from 'react';
 
-function Header() {
+type Media = {
+  id: number;
+  url: string;
+  caption?: string;
+  is_main: boolean;
+  type: string;       // "image", "video", etc.
+};
+
+function Header({media}: Media[]) {
   return (
     <React.Fragment>
         <Carousel.Carousel className="w-full shadow-sm relative">

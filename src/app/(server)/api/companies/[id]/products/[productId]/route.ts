@@ -15,7 +15,7 @@ export async function GET(
   if (isNaN(pid))
     return NextResponse.json({ error: "Invalid product id" }, { status: 400 });
 
-  const products = await prisma.product.findMany({
+  const product = await prisma.product.findFirst({
     where: { company_id: companyId, id: pid },
     select: {
       id: true,
@@ -29,7 +29,13 @@ export async function GET(
   
   const media = await prisma.media.findMany({
     where: { owner_id: pid, owner_type: "PRODUCT" },
+    select: {
+      id: true,
+      url: true,
+      caption: true,
+      owner_id: true,
+    }
   });
 
-  return NextResponse.json({ products, media });
+  return NextResponse.json({ product, media });
 }
