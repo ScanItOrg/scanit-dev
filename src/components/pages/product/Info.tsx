@@ -15,11 +15,11 @@ type Product = {
 function Info({product}: Product) {
     return (
         <React.Fragment>
-            <div className="space-y-4 px-6 flex flex-col items-center">
+            <div className="space-y-4 px-6 flex flex-col items-center w-full">
                 <Button type="button" className="rounded-full pointer-events-none px-10">About Product</Button>
-                <Card.Card className="bg-app-tertiary">
-                    <Card.CardContent className="text-justify mx-auto">
-                        This electric kettle is designed for quick, safe, and efficient boiling. With a sleek stainless steel body, it not only looks modern but is also built to last. The 1.5L capacity is perfect for tea, coffee, or instant noodles. It comes with auto shut-off, boil-dry protection, and a 360° swivel base for easy handling. Ideal for both home and office use, it brings convenience to your daily routine.
+                <Card.Card className="bg-app-tertiary w-full">
+                    <Card.CardContent className="text-justify">
+                        {product.description}
                     </Card.CardContent>
                 </Card.Card>
             </div>

@@ -8,10 +8,10 @@ type Media = {
   url: string;
   caption?: string;
   is_main: boolean;
-  type: string;       // "image", "video", etc.
+  type: string;
 };
 
-function Header({media}: Media[]) {
+function Header({media, product}: Media[]) {
   return (
     <React.Fragment>
         <Carousel.Carousel className="w-full shadow-sm relative">
@@ -21,7 +21,7 @@ function Header({media}: Media[]) {
             <Carousel.CarouselItem>
                 <Card.Card className="bg-app-tertiary rounded-none">
                 <Card.CardContent className="flex aspect-square items-center justify-center">
-                    <Image
+                  <Image
                     src={"/images/jug_1.svg"}
                     alt="jug"
                     width={300}
