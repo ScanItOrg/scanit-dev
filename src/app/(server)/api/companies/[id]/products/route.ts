@@ -31,7 +31,5 @@ export async function GET(
     WHERE p.company_id = ${companyId}
   `;
 
-  console.log("productsWithMedia: ", productsWithMedia);
-
-  return NextResponse.json(productsWithMedia);
+  return NextResponse.json({products: productsWithMedia});
 }

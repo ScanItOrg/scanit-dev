@@ -2,23 +2,19 @@ import * as Accordian from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import * as Card from "@/components/ui/card";
 import React from "react";
+import { Product } from "@/lib/types";
 
-type Product = {
-  id: number;
-  name: string;
-  model_no: string;
-  category: string;
-  release_at: string;
-  description: string;
-};
+interface InfoProp {
+    product: Product
+}
 
-function Info({product}: Product) {
+function Info({product}: InfoProp) {
     return (
         <React.Fragment>
             <div className="space-y-4 px-6 flex flex-col items-center w-full">
                 <Button type="button" className="rounded-full pointer-events-none px-10">About Product</Button>
                 <Card.Card className="bg-app-tertiary w-full">
-                    <Card.CardContent className="text-justify">
+                    <Card.CardContent className="text-justify text-sm">
                         {product.description}
                     </Card.CardContent>
                 </Card.Card>
