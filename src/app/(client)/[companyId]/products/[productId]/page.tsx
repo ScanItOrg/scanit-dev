@@ -4,11 +4,11 @@ import Seemore from "@/components/pages/product/seemore";
 import { Product as ProductData, Media } from "@/lib/types";
 
 export const metadata = {
-    title: "Product",
-    description: "Product"
+  title: "Product",
+  description: "Product"
 }
 
-async function getProductData(companyId: string, productId: string): Promise<{ product: ProductData; media: Media[] }> {
+async function getProductData(companyId: string, productId: string): Promise<{ product: ProductData, media: Media[] }> {
   const API_URL = process.env.API_URL;
   if (!API_URL) throw new Error("Missing API_URL");
 
@@ -32,13 +32,11 @@ export default async function Product({
   const { companyId, productId } = params;
   const { product, media } = await getProductData(companyId, productId);
 
-  console.log("product: ", product, "media: ", media)
-
   return (
-    <>      
-      <Header media ={media} product={product}/>
-      <Info product={product}/>
-      <Seemore companyId={companyId}/>
+    <>
+      <Header media={media} product={product} />
+      <Info product={product} />
+      <Seemore companyId={companyId} />
     </>
   );
 }
