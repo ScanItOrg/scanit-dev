@@ -10,7 +10,7 @@ interface HeaderProp {
   product: ProductData
 }
 
-function Header({ media, product }: HeaderProp) {
+const Header: React.FC<HeaderProp> = ({ media, product }) => {
   return (
     <React.Fragment>
       <Carousel.Carousel className="w-full shadow-2xl rounded-b-[35px] relative">
